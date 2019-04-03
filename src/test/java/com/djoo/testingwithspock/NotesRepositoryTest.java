@@ -33,4 +33,13 @@ public class NotesRepositoryTest {
         assertThat(actualNotes.get(0).getText()).isEqualTo(note1.getText());
         assertThat(actualNotes.get(1).getText()).isEqualTo(note2.getText());
     }
+
+    @Test
+    public void save_savesThenReturnsNote() {
+        Note newNote = Note.builder().text("note 1").build();
+        Note savedNote = subject.save(newNote);
+
+        assertThat(savedNote.getText()).isEqualTo(newNote.getText());
+        assertThat(entityManager.find(Note.class, savedNote.getId())).isEqualTo(savedNote);
+    }
 }

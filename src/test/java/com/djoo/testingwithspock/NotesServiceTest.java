@@ -34,4 +34,14 @@ public class NotesServiceTest {
         assertThat(actualNotes.get(0).getText()).isEqualTo(notes.get(0).getText());
         assertThat(actualNotes.get(1).getText()).isEqualTo(notes.get(1).getText());
     }
+
+    @Test
+    public void newNote_savesNewNoteToRepository() {
+        Note newNote = Note.builder().text("note 1").build();
+        Note expectedSavedNote = Note.builder().id(1L).text(newNote.getText()).build();
+        when(notesRepository.save(newNote)).thenReturn(expectedSavedNote);
+
+        Note savedNote = subject.createNote(newNote);
+        assertThat(savedNote).isEqualTo(expectedSavedNote);
+    }
 }
