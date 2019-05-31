@@ -1,2 +1,6 @@
 server:
   port: 9292
+
+logging:
+  level:
+    com.djoo.testingwithspock: TRACE
